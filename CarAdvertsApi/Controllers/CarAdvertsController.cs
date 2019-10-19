@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CarAdvertsApi.Models.Enums;
 using CarAdvertsApi.Models;
+using CarAdvertsApi.Repositories;
+using System.Net;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,22 +16,45 @@ namespace CarAdvertApi.Controllers
     [Route("api/[controller]")]
     public class CarAdvertsController : Controller {
 
-        // GET: api/values
+        readonly ICarAdvertsRepository _carAdvertsRepository;
+
+        public CarAdvertsController(ICarAdvertsRepository carAdvertService)
+        {
+            _carAdvertsRepository = carAdvertService;
+        }
+
         /// <summary>
         /// Return the list of car advents.
         /// </summary>
         [HttpGet]
-        public IEnumerable<CarAdvert> Get()
-        {   
-            return new CarAdvert[] { new CarAdvert {
-                Id = Guid.NewGuid(),
-                Title = "Opel Astra",
-                Fuel = CarFuelTypes.Gasoline,
-                Price = 5000,
-                New = false,
-                Mileage = 90000,
-                FirstRegistrationDate = new DateTime(2011, 6, 23)
-            } };
+        public async Task<IActionResult> GetList()
+        {
+            try
+            {
+                return Ok(await _carAdvertsRepository.FindCarAdvertsAsync());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
+        }
+
+        /// <summary>
+        /// Create Car Advert resource
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] CarAdvert carAdvert)
+        {
+            try
+            {
+                await _carAdvertsRepository.SaveCarAdvertAsync(carAdvert);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
