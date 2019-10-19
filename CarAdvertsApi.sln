@@ -1,14 +1,14 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarAdvertsApi", "CarAdvertsApi\CarAdvertsApi.csproj", "{58ABE517-FECF-4366-A7FA-C18811785201}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarAdvertsApi.Tests", "CarAdvertsApi.Tests\CarAdvertsApi.Tests.csproj", "{FB06DCDC-0B8E-40C0-A6CC-BC170E0BB8E5}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{644BBB4E-0B92-4026-92F7-E06E99CC5C46}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarAdvertsApi", "CarAdvertsApi\CarAdvertsApi.csproj", "{A4CCAD76-2BE6-4566-8973-BA9D85F39495}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarAdvertsApi.Tests", "CarAdvertsApi.Tests\CarAdvertsApi.Tests.csproj", "{9479B6BF-EC72-429B-9C0E-D7D3097CD994}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,13 +16,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{58ABE517-FECF-4366-A7FA-C18811785201}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{58ABE517-FECF-4366-A7FA-C18811785201}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{58ABE517-FECF-4366-A7FA-C18811785201}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{58ABE517-FECF-4366-A7FA-C18811785201}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB06DCDC-0B8E-40C0-A6CC-BC170E0BB8E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB06DCDC-0B8E-40C0-A6CC-BC170E0BB8E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB06DCDC-0B8E-40C0-A6CC-BC170E0BB8E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB06DCDC-0B8E-40C0-A6CC-BC170E0BB8E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4CCAD76-2BE6-4566-8973-BA9D85F39495}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4CCAD76-2BE6-4566-8973-BA9D85F39495}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4CCAD76-2BE6-4566-8973-BA9D85F39495}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4CCAD76-2BE6-4566-8973-BA9D85F39495}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9479B6BF-EC72-429B-9C0E-D7D3097CD994}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9479B6BF-EC72-429B-9C0E-D7D3097CD994}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9479B6BF-EC72-429B-9C0E-D7D3097CD994}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9479B6BF-EC72-429B-9C0E-D7D3097CD994}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

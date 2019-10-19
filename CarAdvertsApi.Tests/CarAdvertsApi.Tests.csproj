@@ -20,6 +20,7 @@
     <Folder Include="IntegrationTests\" />
     <Folder Include="Helpers\" />
     <Folder Include="Repositories\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CarAdvertsApi\CarAdvertsApi.csproj" />
