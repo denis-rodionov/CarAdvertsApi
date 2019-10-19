@@ -13,7 +13,12 @@ namespace CarAdvertsApi.Tests.Helpers
             return new CarAdvert
             {
                 Id = Guid.NewGuid(),
-                Title = title
+                Title = title,
+                Fuel = CarFuelTypes.Diesel,
+                New = false,
+                Price = 5000,
+                Mileage = 100000,
+                FirstRegistrationDate = new DateTime(2011, 02, 19)
             };
         }
 
