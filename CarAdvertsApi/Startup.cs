@@ -25,6 +25,8 @@ namespace CarAdvertsApi
 
         public IConfiguration Configuration { get; }
 
+        readonly string AllowAllOriginCors = "allow-all-origin";
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -36,6 +38,15 @@ namespace CarAdvertsApi
 
             // Register the Swagger services
             services.AddSwaggerDocument();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(AllowAllOriginCors,
+                builder =>
+                {
+                    builder.AllowAnyOrigin();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +58,8 @@ namespace CarAdvertsApi
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors(AllowAllOriginCors);
 
             // Register the Swagger generator and the Swagger UI middlewares
             app.UseOpenApi();
