@@ -59,5 +59,21 @@ namespace CarAdvertApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Post([FromRoute] Guid id, [FromBody] CarAdvert carAdvert)
+        {
+            if (carAdvert.Id != id)
+                return BadRequest();
+
+            try
+            {
+                await _carAdvertsRepository.UpdateCarAdvertAsync(carAdvert);
+                return Ok();
+            } catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

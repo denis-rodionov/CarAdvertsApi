@@ -7,6 +7,7 @@ using CarAdvertsApi.Models.Enums;
 using CarAdvertsApi.Repositories;
 using CarAdvertsApi.Repositories.impl;
 using CarAdvertsApi.Tests.Helpers;
+using Microsoft.EntityFrameworkCore;
 using Xunit;
 
 namespace CarAdvertsApi.Tests.IntegrationTests
@@ -157,6 +158,58 @@ namespace CarAdvertsApi.Tests.IntegrationTests
             Assert.Equal(advert0.Id, sortedResult.ToArray()[0].Id);
             Assert.Equal(advert2.Id, sortedResult.ToArray()[1].Id);
             Assert.Equal(advert1.Id, sortedResult.ToArray()[2].Id);
+        }
+
+        [Fact]
+        public async Task TestUpdate_AllFields()
+        {
+            // arrange
+            var carAdvert = new CarAdvert
+            {
+                Id = Guid.NewGuid(),
+                Title = "Opel Astra",
+                Fuel = CarFuelTypes.Gasoline,
+                Price = 5000,
+                New = false,
+                Mileage = 90000,
+                FirstRegistrationDate = new DateTime(2011, 6, 23)
+            };
+            await _repository.SaveCarAdvertAsync(carAdvert);
+
+            carAdvert.Title = "Opel Corsa";
+            carAdvert.Fuel = CarFuelTypes.Diesel;
+            carAdvert.Price = 6000;
+            carAdvert.New = false;
+            carAdvert.Mileage = 10000;
+            carAdvert.FirstRegistrationDate = new DateTime(2012, 6, 23);
+
+            // act
+            await _repository.UpdateCarAdvertAsync(carAdvert);
+
+            // assert
+            var results = await _repository.FindCarAdvertsAsync();
+            var actual = Assert.Single(results);
+            Assert.Equal(carAdvert.Id, actual.Id);
+            Assert.Equal(carAdvert.Title, actual.Title);
+            Assert.Equal(carAdvert.Fuel, actual.Fuel);
+            Assert.Equal(carAdvert.Price, actual.Price);
+            Assert.Equal(carAdvert.New, actual.New);
+            Assert.Equal(carAdvert.Mileage, actual.Mileage);
+            Assert.Equal(carAdvert.FirstRegistrationDate, actual.FirstRegistrationDate);
+        }
+
+        [Fact]
+        public async Task TestUpdate_FailIfDoesNotExist()
+        {
+            // arrange
+            var carAdvert = new CarAdvert
+            {
+                Id = Guid.NewGuid(),
+                Title = "Opel Astra"
+            };
+
+            // act
+            await Assert.ThrowsAsync<DbUpdateConcurrencyException>(() => _repository.UpdateCarAdvertAsync(carAdvert));
         }
     }
 }

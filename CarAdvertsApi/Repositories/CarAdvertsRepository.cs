@@ -34,5 +34,11 @@ namespace CarAdvertsApi.Repositories
             _context.Entry(carAdvert).State = EntityState.Added;
             await _context.SaveChangesAsync();
         }
+
+        public async Task UpdateCarAdvertAsync(CarAdvert carAdvert)
+        {
+            _context.Entry(carAdvert).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
     }
 }

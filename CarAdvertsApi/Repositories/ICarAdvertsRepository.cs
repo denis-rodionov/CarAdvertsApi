@@ -26,5 +26,10 @@ namespace CarAdvertsApi.Repositories
         /// one if the car advert with the current ID already exists.
         /// </summary>
         Task SaveCarAdvertAsync(CarAdvert carAdvert);
+
+        /// <summary>
+        /// Update existing entity by ID.
+        /// </summary>
+        Task UpdateCarAdvertAsync(CarAdvert carAdvert);
     }
 }
