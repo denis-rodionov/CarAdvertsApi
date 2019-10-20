@@ -37,5 +37,10 @@ namespace CarAdvertsApi.Repositories
         /// Update existing entity by ID.
         /// </summary>
         Task UpdateCarAdvertAsync(CarAdvert carAdvert);
+
+        /// <summary>
+        /// Delete car advert by Id
+        /// </summary>
+        Task DeleteCarAdvertAsync(Guid id);
     }
 }

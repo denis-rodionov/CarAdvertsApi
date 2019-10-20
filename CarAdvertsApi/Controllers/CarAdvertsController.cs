@@ -95,5 +95,24 @@ namespace CarAdvertApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            try
+            {
+                var existingAdvert = await _carAdvertsRepository.GetCarAdvertAsync(id);
+                if (existingAdvert == null)
+                    return NotFound();
+
+                await _carAdvertsRepository.DeleteCarAdvertAsync(id);
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
     }
 }

@@ -50,5 +50,12 @@ namespace CarAdvertsApi.Repositories
 
             return entity;
         }
+
+        public async Task DeleteCarAdvertAsync(Guid id)
+        {
+            var entity = await GetCarAdvertAsync(id);
+            _context.Entry(entity).State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
+        }
     }
 }

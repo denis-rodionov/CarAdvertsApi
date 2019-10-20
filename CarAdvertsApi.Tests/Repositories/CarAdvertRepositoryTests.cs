@@ -239,5 +239,20 @@ namespace CarAdvertsApi.Tests.IntegrationTests
             // assert
             Assert.Null(actual);
         }
+
+        [Fact]
+        public async Task TestDelete_Success()
+        {
+            // arrange
+            var advert = TestHelpers.CreateCarAdvert("TestDelete_Success");
+            await _repository.SaveCarAdvertAsync(advert);
+
+            // act
+            await _repository.DeleteCarAdvertAsync(advert.Id.Value);
+
+            // assert
+            var list = await _repository.FindCarAdvertsAsync();
+            Assert.Empty(list);
+        }
     }
 }

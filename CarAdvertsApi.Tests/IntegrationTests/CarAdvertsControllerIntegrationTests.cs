@@ -39,5 +39,30 @@ namespace CarAdvertsApi.Tests.IntegrationTests
             var okResult = Assert.IsType<OkObjectResult>(getResponse);
             Assert.Single((IEnumerable<CarAdvert>)okResult.Value);
         }
+
+        [Fact]
+        public async Task CreateEditDelete()
+        {
+            // arrange
+            var carAdvert = TestHelpers.CreateCarAdvert("CreateEditDelete");
+
+            // act
+            await _controller.Post(carAdvert);
+
+            var getResponse = await _controller.GetList();
+            var okResult = Assert.IsType<OkObjectResult>(getResponse);
+            Assert.Single((IEnumerable<CarAdvert>)okResult.Value);
+
+            carAdvert.Price = 100000;
+            var putResponse = await _controller.Put(carAdvert.Id.Value, carAdvert);
+            Assert.IsType<OkResult>(putResponse);
+
+            var deleteResponse = await _controller.Delete(carAdvert.Id.Value);
+            Assert.IsType<NoContentResult>(deleteResponse);
+
+            var getAgainResponse = await _controller.GetList();
+            var getAgainResponseOk = Assert.IsType<OkObjectResult>(getAgainResponse);
+            Assert.Empty((IEnumerable<CarAdvert>)getAgainResponseOk.Value);
+        }
     }
 }
