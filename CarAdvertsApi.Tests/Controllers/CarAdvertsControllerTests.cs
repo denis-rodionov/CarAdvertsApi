@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CarAdvertApi.Controllers;
 using CarAdvertsApi.Repositories;
 using CarAdvertsApi.Repositories.impl;
+using CarAdvertsApi.Tests.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
@@ -33,6 +34,19 @@ namespace CarAdvertsApi.Tests
 
             // assert
             Assert.IsType<BadRequestObjectResult>(response);
+        }
+
+        [Fact]
+        public async Task GetNotFound()
+        {
+            // arrange
+            var id = Guid.NewGuid();
+
+            // act
+            var response = await _controller.Get(id);
+
+            // assert
+            Assert.IsType<NotFoundResult>(response);
         }
     }
 }

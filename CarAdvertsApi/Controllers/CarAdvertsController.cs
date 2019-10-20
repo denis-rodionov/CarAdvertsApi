@@ -43,6 +43,22 @@ namespace CarAdvertApi.Controllers
             
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get([FromRoute] Guid id)
+        {
+            try
+            {
+                var carAdvert = await _carAdvertsRepository.GetCarAdvertAsync(id);
+                if (carAdvert == null)
+                    return NotFound();
+                return Ok(carAdvert);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         /// <summary>
         /// Create Car Advert resource
         /// </summary>
@@ -61,7 +77,7 @@ namespace CarAdvertApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Post([FromRoute] Guid id, [FromBody] CarAdvert carAdvert)
+        public async Task<IActionResult> Put([FromRoute] Guid id, [FromBody] CarAdvert carAdvert)
         {
             if (carAdvert.Id != id)
                 return BadRequest();

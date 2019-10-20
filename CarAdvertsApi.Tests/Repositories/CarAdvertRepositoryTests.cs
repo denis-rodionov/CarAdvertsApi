@@ -211,5 +211,33 @@ namespace CarAdvertsApi.Tests.IntegrationTests
             // act
             await Assert.ThrowsAsync<DbUpdateConcurrencyException>(() => _repository.UpdateCarAdvertAsync(carAdvert));
         }
+
+        [Fact]
+        public async Task TestGet_Found()
+        {
+            // arrange
+            var carAdvert = TestHelpers.CreateCarAdvert("TestGet_Found");
+            await _repository.SaveCarAdvertAsync(carAdvert);
+
+            // act
+            var actual = await _repository.GetCarAdvertAsync(carAdvert.Id.Value);
+
+            // assert
+            Assert.NotNull(actual);
+            Assert.Equal(carAdvert.Title, actual.Title);
+        }
+
+        [Fact]
+        public async Task TestGet_NotFound()
+        {
+            // arrange
+            var id = Guid.NewGuid();
+
+            // act
+            var actual = await _repository.GetCarAdvertAsync(id);
+
+            // assert
+            Assert.Null(actual);
+        }
     }
 }

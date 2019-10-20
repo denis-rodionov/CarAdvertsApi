@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CarAdvertsApi.Models;
 using CarAdvertsApi.Repositories.impl;
@@ -20,6 +21,11 @@ namespace CarAdvertsApi.Repositories
         /// </summary>
         Task<IEnumerable<CarAdvert>> FindCarAdvertsAsync(string sortKey,
             SortOrder sortOrder);
+
+        /// <summary>
+        /// Find Acr Advert by Id.
+        /// </summary>
+        Task<CarAdvert> GetCarAdvertAsync(Guid id);
 
         /// <summary>
         /// Saves new car adverts in the database or overrides an existing
