@@ -33,6 +33,9 @@ namespace CarAdvertsApi
             services.AddControllers();
 
             services.AddScoped<ICarAdvertsRepository, CarAdvertsRepository>();
+
+            // Register the Swagger services
+            services.AddSwaggerDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +47,10 @@ namespace CarAdvertsApi
             }
 
             app.UseHttpsRedirection();
+
+            // Register the Swagger generator and the Swagger UI middlewares
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
 
             app.UseRouting();
 
