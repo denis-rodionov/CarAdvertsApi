@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CarAdvertsApi.Models;
+using CarAdvertsApi.Repositories.impl;
 
 namespace CarAdvertsApi.Repositories
 {
@@ -10,9 +11,15 @@ namespace CarAdvertsApi.Repositories
     public interface ICarAdvertsRepository
     {
         /// <summary>
-        /// Returms all curent car adverts in the database.
+        /// Returms all curent car adverts in the database without sorting.
         /// </summary>
         Task<IEnumerable<CarAdvert>> FindCarAdvertsAsync();
+
+        /// <summary>
+        /// Returms all curent car adverts sorted by sorting key and given direction.
+        /// </summary>
+        Task<IEnumerable<CarAdvert>> FindCarAdvertsAsync(string sortKey,
+            SortOrder sortOrder);
 
         /// <summary>
         /// Saves new car adverts in the database or overrides an existing

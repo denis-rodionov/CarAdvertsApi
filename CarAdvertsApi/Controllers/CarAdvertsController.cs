@@ -7,6 +7,7 @@ using CarAdvertsApi.Models.Enums;
 using CarAdvertsApi.Models;
 using CarAdvertsApi.Repositories;
 using System.Net;
+using CarAdvertsApi.Repositories.impl;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,14 +25,16 @@ namespace CarAdvertApi.Controllers
         }
 
         /// <summary>
-        /// Return the list of car advents.
+        /// Return the list of car advents sorted based on the given parameters.
         /// </summary>
         [HttpGet]
-        public async Task<IActionResult> GetList()
+        public async Task<IActionResult> GetList([FromQuery] string sortKey = "Id",
+            [FromQuery] string sortOrder = "ASK")
         {
             try
             {
-                return Ok(await _carAdvertsRepository.FindCarAdvertsAsync());
+                var parsedSortOrder = Enum.Parse<SortOrder>(sortOrder.ToUpper());
+                return Ok(await _carAdvertsRepository.FindCarAdvertsAsync(sortKey, parsedSortOrder));
             }
             catch (Exception ex)
             {
