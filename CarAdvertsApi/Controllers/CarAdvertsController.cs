@@ -84,6 +84,10 @@ namespace CarAdvertApi.Controllers
 
             try
             {
+                var existingAdvert = await _carAdvertsRepository.GetCarAdvertAsync(id);
+                if (existingAdvert == null)
+                    return NotFound();
+
                 await _carAdvertsRepository.UpdateCarAdvertAsync(carAdvert);
                 return Ok();
             } catch (Exception ex)

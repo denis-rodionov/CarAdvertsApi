@@ -43,7 +43,12 @@ namespace CarAdvertsApi.Repositories
 
         public async Task<CarAdvert> GetCarAdvertAsync(Guid id)
         {
-            return await _context.CarAdverts.Where(c => c.Id == id).SingleOrDefaultAsync();
+            var entity = await _context.CarAdverts.Where(c => c.Id == id).SingleOrDefaultAsync();
+
+            if (entity != null)
+                _context.Entry(entity).State = EntityState.Detached;
+
+            return entity;
         }
     }
 }
