@@ -32,7 +32,7 @@ namespace CarAdvertsApi
         {
             services.AddDbContext<AppDbContext>(opt =>
                            opt.UseInMemoryDatabase("CarAdverts"));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
             services.AddScoped<ICarAdvertsRepository, CarAdvertsRepository>();
 

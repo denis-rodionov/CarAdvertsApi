@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CarAdvertsApi.Models.Enums;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace CarAdvertsApi.Models
 {
@@ -28,6 +30,7 @@ namespace CarAdvertsApi.Models
         /// Required field.
         /// </summary>
         [Required]
+        [JsonConverter(typeof(StringEnumConverter))]
         public CarFuelTypes? Fuel { get; set; }
 
         /// <summary>
